@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contacta con Restaurante Elegance para eventos especiales o consultas.">
+    <title>Contacto - Restaurante</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#C5A880', secondary: '#F9F6F0', dark: '#1A1A1A' },
+                    fontFamily: { sans: ['Lexend', 'sans-serif'], serif: ['Lexend', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Lexend', sans-serif; }
+        .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-secondary text-dark mx-auto max-w-[1400px] shadow-2xl min-h-screen flex flex-col">
+
+    <div id="header-root"></div>
+
+    <main class="flex-grow">
+
+        <!-- Hero -->
+        <div class="w-full h-[50vh] md:h-[65vh] relative animate-on-scroll">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Detalle restaurante" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-black/60"></div>
+            <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-4 animate-on-scroll" data-delay="0.2s">
+                <h1 class="font-serif text-3xl md:text-4xl text-white font-bold tracking-wider mb-6">Contacto</h1>
+                <div class="w-16 h-0.5 bg-primary mx-auto mb-6"></div>
+                <p class="text-white/80 font-light tracking-widest uppercase text-sm">A su entera disposición</p>
+            </div>
+        </div>
+
+        <!-- Formulario -->
+        <div class="px-4 md:px-10 py-24 flex justify-center bg-white animate-on-scroll">
+            <div class="bg-secondary rounded-sm px-6 md:px-20 py-16 md:py-24 max-w-3xl w-full shadow-sm border border-[#eaddce]/50">
+                <div class="text-center mb-16">
+                    <h2 class="font-serif text-2xl md:text-3xl font-bold text-dark mb-4">Escríbenos</h2>
+                    <p class="text-gray-500 font-light text-sm md:text-[15px] leading-relaxed">Estaremos encantados de ayudarle a planificar su evento especial o resolver cualquier duda sobre nuestra propuesta gastronómica.</p>
+                </div>
+                <form action="https://formsubmit.co/mikelvalmasedagarcia@iesbalmasedabhi.com" method="POST" class="flex flex-col gap-10">
+                    <div class="relative group">
+                        <label class="block text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-2">Nombre Completo</label>
+                        <input type="text" name="name" required class="w-full bg-transparent border-b border-gray-300 py-3 text-base font-serif text-dark outline-none focus:border-primary transition-colors duration-300" placeholder="Ej. Juan Pérez" />
+                    </div>
+                    <div class="relative group">
+                        <label class="block text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-2">Correo Electrónico</label>
+                        <input type="email" name="email" required class="w-full bg-transparent border-b border-gray-300 py-3 text-base font-serif text-dark outline-none focus:border-primary transition-colors duration-300" placeholder="ejemplo@correo.com" />
+                    </div>
+                    <div class="relative group">
+                        <label class="block text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-2">Su Mensaje</label>
+                        <textarea name="message" rows="4" required class="w-full bg-transparent border-b border-gray-300 py-3 text-base font-serif text-dark outline-none focus:border-primary transition-colors duration-300 resize-none" placeholder="¿En qué le podemos ayudar?"></textarea>
+                    </div>
+                    <div class="flex justify-center mt-8">
+                        <button type="submit" class="bg-dark text-white px-16 py-4 w-full md:w-auto rounded-full text-xs font-bold tracking-[0.2em] uppercase hover:bg-primary transition-colors shadow-lg duration-300">
+                            Enviar Mensaje
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-root"></div>
+
+    <script type="module" src="../../Controllers/ContactoController.js"></script>
+</body>
+</html>
