@@ -1,22 +1,39 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
 using Restaurante.Data; // Importa nuestra nueva carpeta Data
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ---> AÑADIR ESTO: Conecta el DbContext con la cadena de tu appsettings.json <---
+// Añadir servicios MVC al contenedor
+builder.Services.AddControllersWithViews();
+
+// Conecta el DbContext con la cadena de tu appsettings.json
 builder.Services.AddDbContext<RestauranteContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Configurar Antiforgery para que acepte el token desde la cabecera (Header) para peticiones AJAX/JSON
+builder.Services.AddAntiforgery(options => options.HeaderName = "RequestVerificationToken");
+
 var app = builder.Build();
 
-// Servir todos los archivos estáticos desde la raíz del proyecto
-app.UseStaticFiles(new StaticFileOptions
+// Configurar el pipeline HTTP
+if (!app.Environment.IsDevelopment())
 {
-    FileProvider = new PhysicalFileProvider(builder.Environment.ContentRootPath),
-    RequestPath = ""
-});
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
 
-app.MapGet("/", () => Results.Redirect("/Views/Home/Index.html"));
+app.UseHttpsRedirection();
+
+// Usa la carpeta wwwroot para archivos estáticos por defecto
+app.UseStaticFiles(); 
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+// Configurar el enrutamiento predeterminado de MVC
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
